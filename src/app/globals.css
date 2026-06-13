@@ -1,26 +1,39 @@
+/* src/app/globals.css */
 @import "tailwindcss";
+@import "nextra-theme-docs/style.css";
+
+@variant dark (&:where(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Diwan Primary Brand Orange Hue Accent (24deg) */
+  --nextra-primary-hue: 24deg;
+  --nextra-primary-saturation: 90%;
+  --nextra-primary-lightness: 50%;
+
+  /* Light Mode Base: Match Tailwind's bg-neutral-50 (rgb(250, 250, 250)) */
+  --nextra-bg: 250, 250, 250;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --nextra-primary-lightness: 60%;
+
+  /* Dark Mode Base: Pure match for your landing page's bg-neutral-950 (rgb(10, 10, 10)) */
+  --nextra-bg: 10, 10, 10;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 🧼 CLEAN LAYOUT REFINEMENTS */
+
+/* Smooth out the sidebar border contrast to blend with the background */
+.nextra-sidebar-container {
+  @apply border-neutral-200/40 dark:border-neutral-900/50;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Ensure the main search block inputs look crisp and uniform */
+.nextra-search input {
+  @apply bg-white/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800/80 rounded-lg;
+}
+
+/* Polished styling for inline markdown elements */
+code {
+  @apply rounded-md px-1.5 py-0.5 font-mono text-sm bg-neutral-200/50 dark:bg-neutral-900/60 text-orange-600 dark:text-orange-400;
 }
