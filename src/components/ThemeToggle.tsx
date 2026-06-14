@@ -1,15 +1,23 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+
+  const mounted = useSyncExternalStore(
+    () => () => { },
+    () => true,
+    () => false
+  );
 
   // Prevents hydration flicker issues
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="h-9 w-[220px] bg-neutral-100 dark:bg-neutral-900 rounded-lg animate-pulse" />;
+  if (!mounted) {
+    return (
+      <div className="h-9 w-55 bg-neutral-100 dark:bg-neutral-900 rounded-lg animate-pulse" />
+    );
+  }
 
   const options = [
     { key: "system", label: "System" },
