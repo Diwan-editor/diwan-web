@@ -34,6 +34,58 @@
 }
 
 /* Polished styling for inline markdown elements */
-code {
-  @apply rounded-md px-1.5 py-0.5 font-mono text-sm bg-neutral-200/50 dark:bg-neutral-900/60 text-orange-600 dark:text-orange-400;
+code:not(pre code) {
+  @apply rounded-md font-mono text-sm px-1.5 py-0.5 bg-neutral-100 dark:bg-neutral-800 text-orange-600 dark:text-orange-400;
+}
+
+/* 💻 CODE BLOCK CUSTOMIZATION */
+
+/* Container for the code block */
+.nextra-code-block {
+  @apply mt-6 overflow-hidden rounded-xl border border-neutral-200/50 dark:border-neutral-800/50 shadow-sm;
+}
+
+/* Background and padding for the pre element */
+.nextra-code-block pre {
+  @apply !bg-neutral-50/50 dark:!bg-[#0c0c0c] p-4 text-[13px] leading-relaxed! overflow-x-auto;
+}
+
+/* Styling the filename/title header */
+.nextra-code-block .nextra-code-block-title {
+  @apply flex items-center gap-2 px-4 py-2.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100/50 dark:bg-neutral-900/80 border-b border-neutral-200/50 dark:border-neutral-800/50;
+}
+
+/* Optional: Add a small icon or indicator before the filename */
+.nextra-code-block .nextra-code-block-title::before {
+  content: "";
+  @apply w-2 h-2 rounded-full bg-orange-500/80;
+}
+
+/* Adjust scrollbar for code blocks */
+.nextra-code-block pre::-webkit-scrollbar {
+  @apply h-1.5;
+}
+
+.nextra-code-block pre::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 dark:bg-neutral-700 rounded-full;
+}
+
+/* 📋 COPY BUTTON STYLING */
+.nextra-code-block {
+  @apply relative;
+}
+
+.nextra-code-block button[title="Copy code"] {
+  @apply absolute top-2 right-2 p-2 rounded-lg bg-neutral-100/50 dark:bg-neutral-800/50 
+         text-neutral-500 dark:text-neutral-400 opacity-0 transition-all duration-200 
+         hover:bg-neutral-200/80 dark:hover:bg-neutral-700/80 hover:text-orange-500;
+}
+
+.nextra-code-block:hover button[title="Copy code"] {
+  @apply opacity-100;
+}
+
+/* If there is a title/filename, move the button to the header area */
+.nextra-code-block:has(.nextra-code-block-title) button[title="Copy code"] {
+  @apply top-1.5 right-2 p-1.5;
 }
